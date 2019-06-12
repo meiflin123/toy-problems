@@ -11,5 +11,23 @@
   * don't worry about handling cyclical object structures.
   *
   */
-var deepEquals = function(apple, orange) {
-};
+
+const deepEquals = (item1, item2) => {
+  if (item1 === item2) {return true};
+  
+  if (!(item1 instanceof Object) || !(item2 instanceof Object)) {return false};
+  // note the difference between above and 
+ // if (!item1 instanceof Object || !item2 instanceof Object) {return false};
+  
+  if (Object.keys(item1).length !== Object.keys(item2).length) {return false};
+  
+  for (let key in item1) {
+    
+    if (!deepEquals(item1[key], item2[key])) {return false}
+  }
+  return true;
+
+}
+
+
+console.log(deepEquals({a:1, b: {c:5}},{a:1, b: {c:3}}))
