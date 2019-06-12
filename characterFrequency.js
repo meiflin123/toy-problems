@@ -36,6 +36,43 @@
  */
 
 
-var characterFrequency = function(string) {
+let characterFrequency = function(string) {
+  // create hash table.
+  // loop through string, iterate over each character
+  // if current character is not in hash table, add it to the table
+  // if already in hash table, value++
+
+  //convert an Object {} to an Array [] of key-value pairs
+
+  // sort the array from largest frequency to smallest frequency
+  // sort array in alphabetic order.
+  
+  
+  let hashTable = {};
+  
+  for (let i of string) {
+   // note difference between for... of and for... in
+    if (!hashTable[i]) {
+      hashTable[i] = 1;
+    } else {
+      hashTable[i] +=1; 
+    }
+  }
+  //convert an Object {} to an Array [] of key-value pairs
+  let result = Object.keys(hashTable).map(ch => [ch, hashTable[ch]])
+                                                
+                                                 
+  result.sort((a, b) => b[1]-a[1])
+        .sort((a, b) => {
+    
+    // if a[0] > b[0], return more than 1 = swap., to make b[0] comes first. 
+    if (a[1] === b[1] && a[0] > b[0]) {return 1}
+  })
+
   return result;
+  
+  
 };
+
+
+console.log(characterFrequency('Mmiaaiaaippi'))
