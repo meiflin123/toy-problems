@@ -30,8 +30,7 @@ let DPlongestPalindrome = string => {
          
           if (j-i > end-start) {
             start = i
-            end = j
-            
+            end = j          
           }         
         }   
       } 
@@ -41,10 +40,8 @@ let DPlongestPalindrome = string => {
   return string.slice(start, end+1)
 };
   
-
 let isPalindrome = string => {
   let reverseStr = string.split('').reverse().join('');
-  
   return reverseStr === string;
 }
 
@@ -53,6 +50,8 @@ let centeredLongestP = string => {
   // loop over each ch, 
     //pass two neighbored ch to expandCenter P. case: noon
     // pass index -1, index +1 to expandCenter P. case: dad
+  // time complexity: O(n^2)
+  // space complexity: O(1)
   
   if (string === null) {return null};
   if (string.length === 1) { return string};
@@ -69,25 +68,17 @@ let centeredLongestP = string => {
     if (oddPal.length > result.length) {
       result = oddPal
     }
-  }
-  
+  }  
   return result
-
 }
 
 let expandCenterP = (left, right, string) => {
   // criteria:  left ch and right ch are equal, 
     // expand in each direction
     // new left and new right should be also equal if Palindrome
-  // time complexity: O(n^2)
-  // space complexity: O(1)
-  
   while ( left >= 0 && right < string.length && string[left] === string[right]) {
     left--
-    right++
-         
+    right++        
   }
- 
-  return string.slice(left + 1, right)
-  
+  return string.slice(left + 1, right) 
 }
