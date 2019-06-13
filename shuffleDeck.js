@@ -31,16 +31,31 @@
  *   See https://www.dartmouth.edu/~chance/teaching_aids/books_articles/Mann.pdf .
  */
 
-var shuffleDeck = function(deck) {
-  // Your code here
+let shuffleDeck = deck =>{
+  // iterate each card
+  // swap card at i with random card at location after i
+  // return deck
+  
+  for (let i = 0; i < deck.length; i ++) {
+    swap(i, i + Math.floor(Math.random() * deck.length-i), deck);
+  }
+
+  return deck;
 };
 
-// Ordered deck generator provided for your testing convenience
-// (You may alter this function, but an unaltered copy will be used for tests.)
-var orderedDeck = function() {
-  var suits = [ '♥', '♣', '♠', '♦' ];
-  var values = [ 'A', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K' ];
-  var deck = [];
+let swap = (currentIndex, randomIndex, deck) => {
+  let temp = deck[currentIndex];
+  deck[currentIndex] = deck[randomIndex];
+  deck[randomIndex] = temp
+
+} 
+
+
+
+let orderedDeck = function() {
+  let suits = [ '♥', '♣', '♠', '♦' ];
+  let values = [ 'A', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K' ];
+  let deck = [];
 
   suits.forEach(function(suit) {
     values.forEach(function(value) {
