@@ -33,6 +33,37 @@
 // Feel free to add helper functions if needed.
 
 
-var bubbleSort = function(array) {
-  // Your code here.
-};
+let bubbleSort = array => {
+  // criteria: even just one swapping in the entire for loop function will require another for-loop sorting.
+  // while swap is true, loop continues. 
+    // iterate each number
+    // if number at i > number at i +1
+    // swap and update global swap
+  //Time complexity: O(n^2)
+  
+  // Optimization: after each iteration, largest number will be pushed to the end of array, so len-- to shorter the next looping.
+  // Time complexity is still O(n^2)
+  let swaps = true;
+  let len = array.length;
+  while (swaps === true) {
+    swaps = false;
+    for (let i = 0; i < len-1; i++) {
+      if (array[i] > array[i +1]) {
+        swaps = true;
+        swap(i, i+1, array);
+      } 
+    } 
+    len--
+  } 
+ 
+  return array;
+}
+
+let swap = (firstIndex, secondIndex, array) => {
+  let temp = array[firstIndex];
+  array[firstIndex] = array[secondIndex];
+  array[secondIndex] = temp;
+
+}
+
+console.log(bubbleSort([3,7,3,1]))
