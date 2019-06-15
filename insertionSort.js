@@ -35,18 +35,44 @@
 
 // This function is to help you test, and should not be incorporated in your solution.
 // It will transform an array of numbers into an array of valid objects.
-var testingTransform = function(array) {
-  var transform = [];
+let insertionSort = function(array, comparator) {
+  // criteria: compares i to 0<j<i
+  for (let i = 1; i < array.length; i++) {
+    for (let j = 0; j < i; j++) {     
+      let a = array[j]
+      let b = array[i]   
+      if (comparator(a.value, b.value) > 0){
+        swap(j, i, array)
+      }
+    }  
+  }
+  return array;
+};
+let swap = (firstIndex, secondIndex, array) => {
+  let temp = array[firstIndex];
+  array[firstIndex] = array[secondIndex];
+  array[secondIndex] = temp;
   
-  for (var i = 0; i < array.length; i++) {
+}
+let comparator = (a, b) => {
+  if (a > b) {
+    return 1
+  }  
+  if (a < b) {
+    return -1
+  } 
+  return 0
+}
+let testingTransform = function(array) {
+  let transform = [];
+  
+  for (let i = 0; i < array.length; i++) {
     transform.push({value: array[i], i: i});
   }
 
   return transform;
 };
 
-var insertionSort = function(array
-) {
-  // Your code goes here. Feel free to add helper functions if needed.
-  return array;
-};
+let numbers = testingTransform([2,4,1, 6, 8, 0, 4, 10, 33, 0]);
+
+console.log(insertionSort(numbers,comparator));
