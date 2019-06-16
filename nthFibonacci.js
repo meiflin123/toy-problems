@@ -20,7 +20,35 @@
  *
  */
 
-var nthFibonacci = function (n) {
-  // TODO: implement me!
+let nthFibonacci = n => {
+  // solution1: recursive.
+  //Time complexity: O(2^n) since T(n) = T(n-1) + T(n-2)is an exponential time
+  //Space complexity: O(n) - space for recursive function call stack
+  if (N <= 1) {
+    return N
+  } else {
+    return fib(N-1) + fib(N-2)
+  }
 };
+
+let nthFib = n => {
+  // solution1: iterative
+  //Time complexity: O(n)
+  //Space complexity: O(1)
+   if (N <= 1) {
+    return N
+  } 
+  
+  let a = 0;
+  let b = 1;
+  for (let i = 1 ; i < N; i++) {
+    let temp = a + b;
+    a = b;
+    b = temp
+  }
+  return b
+};
+
+
+
 
