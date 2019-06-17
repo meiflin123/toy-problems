@@ -66,6 +66,16 @@ LinkedList.prototype.contains = function(num) {
   return console.log(false);
 }
 
+LinkedList.prototype.printList = function() {
+  var current = this.head;
+  var str = ''
+  while (current) {
+    str+= current.value + ' ';
+    current = current.next
+  }
+  console.log(str)
+}
+
 LinkedList.prototype.makeNode = function(num) {
   return { value: num, next: null};
 };
