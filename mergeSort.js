@@ -97,6 +97,40 @@
 
 
 
-var mergeSort = function(array) {
-  // Your code here.
+let mergeSort = function(array) {
+  // recursively split half array each time down to single numbers. 
+  
+  if (array.length === 1) {
+    return array;
+  };
+  let half = Math.floor(array.length/2);
+  let leftHalf = array.slice(0, half);
+  let rightHalf = array.slice(half);
+  console.log(leftHalf, rightHalf)
+  
+  return merge(mergeSort(leftHalf), mergeSort(rightHalf));
+ 
+  
 };
+
+
+let merge = function (left, right) {
+  if (!left) {return left};
+  if (!right) {return right};
+  let finalLength = left.length + right.length; 
+  let result = [];
+  
+  let i = 0; 
+  let j = 0;
+  
+  while (result.length < finalLength) {
+    if (left[i] < right[j] || right[j] === undefined){
+      result.push(left[i++])
+      // result.push(left[i++]) = result.push(left[i]) and then i++
+    } else {
+      result.push(right[j++])
+    }
+  }
+  
+  return result;
+}
