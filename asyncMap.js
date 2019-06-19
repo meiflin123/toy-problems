@@ -39,5 +39,30 @@
  */
 
 
-var asyncMap = function(tasks, callback) {
+let asyncMap = function(tasks, callback) {
+  // solution one: forEach
+  // criteria: use index to control orders, and keep track of results.
+  let results = []
+  let count = 0;
+  tasks.forEach((task, index) => {
+    let cb = function(value) {
+      results[index] = value;
+      count ++
+      if (count === tasks.length) {
+        callback(results)
+      }
+    }
+    task(cb)
+  })
+  return results
 };
+
+let asyncMap = function(tasks, callback) {
+  // solution 2: Promise and map
+  Promise.all(tasks.map(task =>  new Promise (task))).then(callback);
+  //Promise.all(tasks.map(task =>  new Promise (task))).then(result => callback(result));
+  
+  
+};
+
+
