@@ -67,7 +67,7 @@
 // and then iteratively returns the root of the `BinaryHeap` until its empty, thus returning a sorted array.
 
 function BinaryHeap () {
-  
+  // time complexity: O(1) find max, O(log n) insert, O(log n) delete
   this._heap = [];
   // this compare function will result in a minHeap, use it to make comparisons between nodes in your solution
   this._compare = function (i, j) { return i < j };
