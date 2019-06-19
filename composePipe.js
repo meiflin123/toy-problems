@@ -33,8 +33,21 @@
 
 'use strict';
 
-var compose = function() {
+var compose = function(...args) {
+  //let compose = (...args) => val => args.reduceRight((val, func) => func(val), val)
+  return function(val) {
+    return args.reduceRight((val, func) => {  
+      return func(val)    
+    }, val)
+  }
 };
 
-var pipe = function() {
+
+ar pipe = function(...args) {
+  //let pipe = (...args) => val => args.reduce((val, func) => func(val), val)
+  return function(val) {
+    return args.reduce((val, func) => {  
+      return func(val)    
+    }, val)
+  }
 };
