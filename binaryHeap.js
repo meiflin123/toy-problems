@@ -66,8 +66,8 @@
 // Extra extra credit: Implement `heapSort`. `heapSort` takes an array, constructs it into a `BinaryHeap`
 // and then iteratively returns the root of the `BinaryHeap` until its empty, thus returning a sorted array.
 
-
 function BinaryHeap () {
+  
   this._heap = [];
   // this compare function will result in a minHeap, use it to make comparisons between nodes in your solution
   this._compare = function (i, j) { return i < j };
@@ -79,9 +79,73 @@ BinaryHeap.prototype.getRoot = function () {
 }
 
 BinaryHeap.prototype.insert = function (value) {
-  // TODO: Your code here
+  // TODO: compare child with its parent continuelly up a level until child > parent
+  this._heap.push(value)
+  let childIndex = this._heap.length-1; 
+  let parentIndex = Math.floor((childIndex -1) / 2)
+  
+  while (this._compare(value, this._heap[parentIndex])) {
+    this.swap(childIndex, parentIndex)
+    childIndex = parentIndex
+    parentIndex = Math.floor((parentIndex - 1)/2)
+  }  
 }
 
 BinaryHeap.prototype.removeRoot = function () {
-  // TODO: Your code here
+  // swap last item with first item 
+  // remove current last item. 
+  // call minHeap
+  let heapSize = this._heap.length
+  this.swap(0, heapSize-1);
+  this._heap.pop();
+  this.minHeap(0, heapSize)
 }
+
+BinaryHeap.prototype.minHeap = function (i, heapSize) {
+  // compare parent and children,  smallest will be parent.
+ 
+  if (i > heapSize) {return;}
+  let parent = this._heap[i]
+   console.log(parent, parent > heapSize)
+  
+  let left = this._heap[i * 2 + 1];
+  let right =this._heap[i * 2 + 2];
+  let smallest = i // idx
+
+ 
+  if (i < heapSize && this._compare(left, parent)) {
+   
+    smallest = i * 2 + 1 // idx at left
+  } 
+
+  if (i < heapSize && this._compare(right, left)) {
+    smallest = i * 2 + 2 // idx at right
+  }
+ 
+  if (smallest !== i) {
+    this.swap(i, smallest);
+    this.minHeap(smallest, heapSize);
+  }
+
+}
+ 
+BinaryHeap.prototype.swap = function(firstIndex, secondIndex) {
+  let temp = this._heap[firstIndex];
+  this._heap[firstIndex] = this._heap[secondIndex];
+  this._heap[secondIndex] = temp;
+}
+
+let tree = new BinaryHeap();
+tree.insert(1)
+tree.insert(10)
+tree.insert(2)
+tree.insert(3)
+tree.insert(11)
+tree.insert(1)
+tree.insert(1)
+tree.insert(1)
+tree.insert(9)
+tree.insert(0)
+tree.removeRoot()
+
+console.log(tree)
