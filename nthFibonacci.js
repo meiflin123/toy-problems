@@ -20,18 +20,18 @@
  *
  */
 
-let nthFibonacci = n => {
+let nthFibonacci = N => {
   // solution1: recursive.
   //Time complexity: O(2^n) since T(n) = T(n-1) + T(n-2)is an exponential time
   //Space complexity: O(n) - space for recursive function call stack
   if (N <= 1) {
     return N
   } else {
-    return fib(N-1) + fib(N-2)
+    return nthFibonacci(N-1) + nthFibonacci(N-2)
   }
 };
 
-let nthFib = n => {
+let nthFib = N => {
   // solution1: iterative
   //Time complexity: O(n)
   //Space complexity: O(1)
