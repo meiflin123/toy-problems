@@ -43,7 +43,19 @@
  *  - Make your function accept a parameter for the direction of rotation (1 = clockwise, -1 = counterclockwise)
  */
 
-var rotateMatrix = function(matrix
-) {
-  // Your code here.
+let rotateMatrix = function(matrix) {
+  // columns in rotated matrix = rows in original matrix
+  // rows in rotated matrix = columns in original matrix
+
+  let m = matrix.length; // length of each nested array in new matrix
+  let n = matrix[0].length; // number of rows in new matrix
+  let newMatrix = [];
+  for (let i = 0; i < n; i++) {
+    newMatrix[i] = [];
+    for (let j = 0; j < m; j++) {
+      newMatrix[i][j] = matrix[m-1-j][i]
+    }
+  }
+
+  return newMatrix;
 };
