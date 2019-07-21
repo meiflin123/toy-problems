@@ -17,8 +17,36 @@ makeChange(1) === 1
 // aka, there's only two ways to make 2p. that's with two, 1p pieces or with a single 2p piece
 makeChange(2) === 2
 */
+var coins = {
+    '1p': 1,
+    '2p': 2,
+    '5p': 5,
+    '10p': 10,
+    '20p': 20,
+    '50p': 50,
+    '£1': 100,
+    '£2': 200
+  }
 
-var makeChange = function(total) {
+var coinSum = function(target) {
+  // time Complexity: O(target * number of coins).
+  // space complexity: space(number of coins)
+  var arr = new Array(target + 1).fill(0);
+  arr[0] = 1;
+  coins = Object.values(coins);
 
+  coins.forEach(coin => {
+    // since if current coin > subtarget, the possibility of finding the subtarget === possibility if without the current coin
+    // which means changes only happen when coin =< subtarget. 
+    for (var i = coin; i <= target; i++) {   // subtargets ++ from current coin. 
+         arr[i] += arr[i - coin];            // nonchanging current coin. 
+     
+    }
+  }
+)
+  return arr[target]
 };
+
+
+
 
