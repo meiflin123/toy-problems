@@ -37,9 +37,23 @@ Tree.prototype.addChild = function(child) {
   *  3.) between my grandma and my grandma -> my grandma
   *  4.) between me and a potato -> null
   */
-Tree.prototype.getClosestCommonAncestor = function(/*...*/
-) {
-  // TODO: implement me!
+Tree.prototype.getClosestCommonAncestor = function(child1, child2) {
+  var closest = null;
+  if (child1 === child2) { // if same, common ancestor is themselvies
+    closest = child1
+  }
+
+  // if child1 and child2 are descenants of this tree, current closest is this tree
+  if (this.isDescendant(child1) && this.isDescendant(child2)) {
+    closest = this;   
+
+    // check if this tree's child tree are ancestor of child1, child2.
+    for (var i = 0;  i < this.children.length; i++) {
+      closest = this.children[i].getClosestCommonAncestor(child1, child2) || closest;
+    }
+  }
+
+  return closest
 };
 
 /**
@@ -50,9 +64,20 @@ Tree.prototype.getClosestCommonAncestor = function(/*...*/
   * 3.) me.getAncestorPath(me) -> [me]
   * 4.) grandma.getAncestorPath(H R Giger) -> null
   */
-Tree.prototype.getAncestorPath = function(/*...*/
-) {
-  // TODO: implement me!
+Tree.prototype.getAncestorPath = function(child) {
+  
+  var path = [];
+  // check if child is part of this tree
+  if(this.isDescendant(child) || this === child){
+    path.push(this);
+
+  // if yes, 
+  // find the children that's ancestor of this child
+    for (var i = 0; i < this.children.length; i++) {
+      path = path.concat(this.children[i].getAncestorPath(child))
+    }
+  }
+  return path.length > 0? path : null;
 };
 
 /**
@@ -86,3 +111,13 @@ Tree.prototype.removeChild = function(child) {
     throw new Error('That node is not an immediate child of this tree');
   }
 };
+
+
+/*var grandma = new Tree();
+var mom = new Tree();
+grandma.addChild(mom);
+var me = new Tree();
+var brother = new Tree();
+mom.addChild(me);
+mom.addChild(brother)
+JSON.stringify(grandma.getClosestCommonAncestor(me, mom)); // => [grandma, mom, me]*/
