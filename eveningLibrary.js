@@ -60,4 +60,5 @@ obj.on('ageChange', function(num1, num2){console.log('2nd Event', num1 + num2)})
 obj.age++;
 obj.on('2Change', function(){console.log(2)})
 obj.trigger('ageChange', 1, 2);  // hi 1 hello3 
+obj.trigger('2Change') // 2
 
