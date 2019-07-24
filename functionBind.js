@@ -23,10 +23,15 @@
  *
 */
 
-var bind = function(
-) {
-  // TODO: Your code here
+var bind = function(fn, context) {
+  var bindArg = Array.prototype.slice.call(arguments, 2)
+  return function() {
+    var callArgs = [...arguments]
+    var allArgs = bindArg.concat(callArgs);
+    return fn.apply(context, allArgs)
+  }
 };
+
 
 /*
  * Function.prototype.bind:
@@ -53,7 +58,12 @@ var bind = function(
  *
 */
 
-Function.prototype.bind = function(
-) {
-  // TODO: Your code here
+Function.prototype.bind = function(context) {
+  var fn = this;
+  var bindArg = Array.prototype.slice.call(arguments, 1);
+  return function() {
+    var callArgs = [...arguments];
+    var allArgs = bindArg.concat(callArgs);
+    return fn.apply(context, allArgs);
+  }
 };
