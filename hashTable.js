@@ -41,8 +41,7 @@ let makeHashTable = function() {
 
   result.remove = function(key) {
     let bucketIdx = getIndexBelowMaxForKey(key, storageLimit);
-    let filterTarget = storage[bucketIdx].filter(tuple => tuple[0] !== key);
-    return filterTarget;
+    storage[bucketIdx].splice(0, storage[bucketIdx].length,...storage[bucketIdx].filter(tuple => tuple[0] !== key));
   };
 
   return result;
