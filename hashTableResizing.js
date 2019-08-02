@@ -35,36 +35,30 @@ var makeHashTable = function() {
     // if tuples size greater than 3/4 of the storage limit, double storageLimit and rehash each key. 
     if (size > (3/4) * storageLimit) {
       storageLimit = storageLimit * 2;
-      var newStorage = [];
-      for (var slot of storage) {   // iterate over slots in storage
-        for (var bucket of slot || []) {    //iterate each bucket or iterate 
-          var tupleKey = bucket[0];     // get key in tuple
-          this.hash(newStorage, bucket, getIndexBelowMaxForKey, tupleKey, storageLimit); // rehash key
-        }    
-      }
-
-      // update storage.
-      storage = newStorage
+      this.rehash();
     } 
     
     // if utilization drops below 1/4, half the current storageLimit and rehash each key
     if(size < (1/4) * storageLimit) {
       storageLimit = storageLimit / 2;
-      var newStorage = [];
-      for (var array of storage) {
-        for (var itemArr of array) {
-          var key = itemArr[0];
-           this.hash(newStorage, itemArr, getIndexBelowMaxForKey, key, storageLimit);
-        }    
-      }
-
-      // update storage.
-      storage = newStorage
+      this.rehash();
       
     }
     this.hash(storage, tuple, getIndexBelowMaxForKey, key, storageLimit);
     
   };
+
+  result.rehash = function() {
+    var newStorage = [];
+      for (var bucket of storage) {   // iterate over buckets in storage
+        for (var tuple of bucket || []) {    //iterate each tuple or iterate 
+          var tupleKey = tuple[0];     // get key in tuple
+          this.hash(newStorage, tuple, getIndexBelowMaxForKey, tupleKey, storageLimit); // rehash key
+        }   
+      }
+      // update storage.
+      storage = newStorage
+  }
 
   result.hash = function(storage, tuple,getIndexBelowMaxForKey, key, storageLimit) {
     var bucketIdx = getIndexBelowMaxForKey(key, storageLimit);
