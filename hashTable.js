@@ -21,10 +21,21 @@ let makeHashTable = function() {
   let storage = [];
   let storageLimit = 1000;
   result.insert = function(key, value) {
-    let tuple = [key, value]
     let bucketIdx = getIndexBelowMaxForKey(key, storageLimit);
     storage[bucketIdx] = storage[bucketIdx] || [];
-    storage[bucketIdx].push(tuple);
+
+
+    // if key already exist, reassign value. 
+    for (let i = 0; i < storage[bucketIdx].length; i++) {
+        let tuple = storage[bucketIdx][i];
+        if (tuple[0] === key) {
+          tuple[1] = value;
+          return;
+        };
+      };
+
+    // else, insert new key-value pair.
+    storage[bucketIdx].push([key, value]);
   };
 
   result.retrieve = function(key) {

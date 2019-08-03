@@ -29,7 +29,6 @@ var makeHashTable = function() {
   var size = 0;
   
   result.insert = function(key, value) {
-    var tuple = [key, value];
     size++
 
     // if tuples size greater than 3/4 of the storage limit, double storageLimit and rehash each key. 
@@ -44,7 +43,7 @@ var makeHashTable = function() {
       this.rehash();
       
     }
-    this.hash(storage, tuple, getIndexBelowMaxForKey, key, storageLimit);
+    this.hash(storage, getIndexBelowMaxForKey, key, value, storageLimit);
     
   };
 
@@ -53,18 +52,28 @@ var makeHashTable = function() {
       for (var bucket of storage) {   // iterate over buckets in storage
         for (var tuple of bucket || []) {    //iterate each tuple or iterate 
           var tupleKey = tuple[0];     // get key in tuple
-          this.hash(newStorage, tuple, getIndexBelowMaxForKey, tupleKey, storageLimit); // rehash key
+          var tupleVal = tuple[1];
+          this.hash(newStorage, getIndexBelowMaxForKey, tupleKey, tupleVal, storageLimit); // rehash key
         }   
       }
       // update storage.
       storage = newStorage
   }
 
-  result.hash = function(storage, tuple,getIndexBelowMaxForKey, key, storageLimit) {
+  result.hash = function(storage, getIndexBelowMaxForKey, key, value, storageLimit) {
     var bucketIdx = getIndexBelowMaxForKey(key, storageLimit);
     storage[bucketIdx] = storage[bucketIdx] || [];
-    storage[bucketIdx].push(tuple);
-    console.log('hi', key, storage, storageLimit, bucketIdx)
+
+    // if key already exist, reassign value. 
+    for (var i = 0; i < storage[bucketIdx].length; i++) {
+        if (storage[bucketIdx][i][0] === key) {
+          storage[bucketIdx][i][1] = value;
+          return;
+        };
+      };
+
+    // else, insert new key-value pair.
+    storage[bucketIdx].push([key, value]);
 
   }
 
