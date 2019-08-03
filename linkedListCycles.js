@@ -36,5 +36,46 @@ var Node = function(value) {
 };
 
 var hasCycle = function(linkedList) {
-  // TODO: implement me!
+  // solution 1: hash table
+  //Time complexity : O(n). visit each of the n elements in the list at most once
+  //Space complexity: O(n). The space depends on the number of elements added to the hash table, which contains at most n elements. 
+
+  // iterate over the linkedList
+  // create hash table and store the nextNodes
+    // if found duplicated, return true.
+  var hashTable = {};
+
+  return function recurse (linkedList) { 
+  // end of the list? no cycle. 
+    if (linkList.value === null || linkedList.next === null) {
+      return false;
+    }
+
+    if (hashTable[linkedList.value]) {
+      return true; // found visited node
+    } else {
+      // record node.
+      hashTable[linkedList.value] = 'T'; 
+      return recurse(linkedList.next);
+    }
+  }(linkedList)
+};
+
+var hasCycle = function(linkedList) {
+  // solution 2: two pointers will meet if it's cyclic linkList.
+  //Time complexity : O(n)
+  //Space complexity: O(1). use only two nodes.
+
+  var slow = linkedList;  
+  var fast = linkedList;
+
+  while(fast && fast.next) {
+    slow = slow.next;  // slow racer moves one step at a time
+    fast = fast.next.next;  // fast racer moves two step at a time
+
+    if (slow === fast) {  // if meets
+      return true
+    }
+  }
+  return false;
 };
