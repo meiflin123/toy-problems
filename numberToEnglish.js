@@ -53,6 +53,74 @@ var numbersToPlace = {
   1000000000000000000: 'quintillion',
 };
 
+var t = ['Hundred', 'Thousand', 'Million', 'Billion']
+
 Number.prototype.toEnglish = function () {
   // return my value as english words
+  // slice number by three digits, add remaining none 3 digits. 
+  // set variable words = [];
+  // for Each three digits string, 
+    // build english words:
+      // get hundred: NumberToWords[str[0]] + numbersToPlace[str[1]]
+      // get decades: if < 21, numbersToWords[str], else. numbersToWords[str[0]] + last digit
+      // push to words array
+      // get more than hundreds: if i > 0, push numbersToPlace[i] to word array.
+  // join words array to result
+  // return result
+
+  if (num === 0) {return 'Zero'}
+  var number = this.toString();
+  var threeDigits = [];
+  var len = number.length
+  var result = []
+  
+  while (len > 0) {
+    threeDigits.push(number.slice(len - 3 > 0? len -3 : 0, len));
+    len -=3
+  }
+  
+  for (var i = 0; i < threeDigits.length; i ++) {
+
+    var str = threeDigits[i]
+    var word = [];
+    var hundred;
+    var decade;
+    var singles;
+      
+
+    if (str.length === 3) {
+     if (str[0] !== '0') {
+      hundred =  numbersToWords[str[0]] + '-' + t[0];
+      word.push(hundred);
+      
+     }
+      str = str.slice(1);
+    }
+      
+    if (str.length <= 2) {
+        if (+str) {
+            if (str < 21) { 
+              decade = numbersToWords[+str]
+              word.push(decade);    
+            } else {
+              decade = numbersToWords[str[0] + '0'] ;
+              word.push(decade)
+                if (+str[1]) {
+                   singles = numbersToWords[str[1]];
+                    word.push(singles)
+                }
+             } 
+         }
+          
+      }
+      
+    if (word.length !==0) {
+        if (i > 0) {  // add thousdands or above.
+          word.push(t[i]);
+        }
+        result.unshift(word.join(' '))
+    }    
+  }
+    
+  return result.join(' ');
 };
