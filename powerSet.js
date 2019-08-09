@@ -34,7 +34,7 @@ var powerSet = function(str,  subsets=[''], current='') {
     current = current.slice(0, current.length-1);
   }  
 
-  return subsets.length;
+  return subsets;
 
 };
 
