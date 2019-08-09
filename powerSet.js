@@ -17,5 +17,25 @@
  * -> ["", "j", "ju", "jm", "jp", "jmu", "jmp", "jpu", "jmpu", "u", "m", "p", "mu", "mp", "pu", "mpu"]
  */
 
-var powerSet = function(str) {
+var powerSet = function(str,  subsets=[''], current='') {
+ 
+  // print out all the substrs of subsets
+  if (current) {
+    subsets.push(current);
+  }
+  if (!str) {
+    return;
+  }
+  for (var i = 0; i < str.length; i++) {
+    current += str[i];
+    var newStr =  str.slice(i + 1)  // scan to the right one by one. 
+  
+    powerSet(newStr,subsets, current);
+    current = current.slice(0, current.length-1);
+  }  
+
+  return subsets.length;
+
 };
+
+powerSet("jump")
