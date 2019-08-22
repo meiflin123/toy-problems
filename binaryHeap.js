@@ -104,7 +104,7 @@ BinaryHeap.prototype.removeRoot = function () {
 BinaryHeap.prototype.minHeap = function (i, heapSize) {
   // compare parent and children,  smallest will be parent.
  
-  if (i > heapSize) {return;}
+  if (i >= heapSize) {return;}
   let parent = this._heap[i]
    console.log(parent, parent > heapSize)
   
@@ -113,12 +113,12 @@ BinaryHeap.prototype.minHeap = function (i, heapSize) {
   let smallest = i // idx
 
  
-  if (i < heapSize && this._compare(left, parent)) {
+  if (this._compare(left, parent)) {
    
     smallest = i * 2 + 1 // idx at left
   } 
 
-  if (i < heapSize && this._compare(right, left)) {
+  if (this._compare(right, left) && this._compare(right, parent)) {
     smallest = i * 2 + 2 // idx at right
   }
  
@@ -136,7 +136,6 @@ BinaryHeap.prototype.swap = function(firstIndex, secondIndex) {
 }
 
 let tree = new BinaryHeap();
-tree.insert(1)
 tree.insert(10)
 tree.insert(2)
 tree.insert(3)
