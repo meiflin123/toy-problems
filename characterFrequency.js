@@ -66,13 +66,15 @@ let characterFrequency = function(string) {
         .sort((a, b) => {
     
     // if a[0] > b[0], return more than 1 = swap., to make b[0] comes first. 
-    if (a[1] === b[1] && a[0] > b[0]) {return 1}
+    if (a[1] === b[1]) {
+      if (a[0] < b[0]) {
+        return -1;
+      } else if(a[0] > b[0]){
+        return 1;
+      }
+   }
   })
-
-  return result;
-  
-  
 };
 
 
-console.log(characterFrequency('Mmiaaiaaippi'))
+console.log(characterFrequency('Mmiaaiaaippi')) 
