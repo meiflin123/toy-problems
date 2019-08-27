@@ -117,7 +117,18 @@ Tree.prototype.removeChild = function(child) {
 var mom = new Tree();
 grandma.addChild(mom);
 var me = new Tree();
-var brother = new Tree();
 mom.addChild(me);
-mom.addChild(brother)
-JSON.stringify(grandma.getClosestCommonAncestor(me, mom)); // => [grandma, mom, me]*/
+var bro = new Tree()
+var aunt = new Tree()
+var cousin = new Tree();
+aunt.addChild(cousin);
+grandma.addChild(aunt)
+mom.addChild(bro);
+var greatGrandma = new Tree ()
+greatGrandma.addChild(grandma)
+ console.log('path' , greatGrandma.getAncestorPath(me))// -> [greatGrandma, grandma, mom, me]
+ mom.getAncestorPath(me) //-> [mom, me]
+ me.getAncestorPath(me) //-> [me]
+ grandma.getAncestorPath(H R Giger) -> null
+console.log('path', grandma.getAncestorPath(me)); // => [grandma, mom, me]
+console.log('common', JSON.stringify(grandma.getClosestCommonAncestor(me, mom)))*/
