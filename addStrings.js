@@ -1,4 +1,4 @@
-/*Question: Write a function addStrings(string1, string2) that takes in two decimals as strings and returns a...
+/*Question: 
 Write a function addStrings(string1, string2) that takes in two decimals as strings and returns a string of their sum. *Simply converting strings to numbers and adding them together isn’t acceptable.* The program must be able to handle large decimals.
 
 Be sure to touch on these when solving for the solution:
@@ -25,18 +25,24 @@ Please do the solution in either JavaScript or Ruby so that I can understand bet
 
 var addString = function(str1, str2){
   //split strings into array by decimal points
-  //compare length of left Of Decimal for each array, put 0 in missing spaces for the strings
-  //compare length of Right Of Decimal for each string, put 0 in missing spaces for the strings
-  // concat with '.'
+    //if whole integer, put 0 at index 1. 
 
+  //compare length for each index, 
+    //  unshift 0 in missing spaces to the left for index0. 
+    //  push 0 in missing spaces to the right for index1.
+  // concat with '.'
+  
   //set num1, num2, carry, result
   //iterate from last character
     //if char is '.', result = '.' + result. continue with next iteration
-    //add num1 and num2  and carry = sum
-    //if sum > 10, carry = 1 else carry = 0;
-    //result = sum + result
+    //add num1 and num2 and carry = sum
+    //reset carry = 0 
+    //if sum >= 10, carry = 1, sum = sum - 10;
+    //if sum > 0, trailingZero is false;
+    //if sum === 0 and trailing zero is true, sum = '' and trailingZero = false
+    //result = sum + result;
 
-  //if there's remaining carry, append it to the result and return. 
+  //if there's remaining carry, append it to the result.
   //return result.
 
   var arr1 = str1.split('.');
@@ -85,8 +91,8 @@ var addString = function(str1, str2){
     }
 
     if(sum === 0 & trailingZero === true) {
-         sum = '';
-         trailingZero = false;
+      sum = '';
+      trailingZero = false;
     } 
     result = sum + result;
   }
@@ -114,3 +120,4 @@ var padLength = function(long, short, index) {
 addString( '3.141', '10.090')
 
 addString( '1099.999999999990001', '10000000.000000000000000201000')
+

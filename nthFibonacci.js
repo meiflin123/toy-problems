@@ -32,9 +32,10 @@ let nthFibonacci = N => {
 };
 
 let nthFib = N => {
-  // solution1: iterative
+  // solution2: iterative
   //Time complexity: O(n)
   //Space complexity: O(1)
+  //key: iterate from 1 to N-1 because first fib at index 0, so to get Nth fib, i should be N - 1.
    if (N <= 1) {
     return N
   } 
