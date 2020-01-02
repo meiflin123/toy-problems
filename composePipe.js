@@ -43,7 +43,7 @@ var compose = function(...args) {
 };
 
 
-ar pipe = function(...args) {
+var pipe = function(...args) {
   //let pipe = (...args) => val => args.reduce((val, func) => func(val), val)
   return function(val) {
     return args.reduce((val, func) => {  

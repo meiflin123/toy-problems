@@ -25,6 +25,8 @@
 
 var bind = function(fn, context) {
   var bindArg = Array.prototype.slice.call(arguments, 2)
+  var bind = (fn, context, ...args) =>  {
+  var bindArg = args
   return function() {
     var callArgs = [...arguments]
     var allArgs = bindArg.concat(callArgs);
@@ -32,7 +34,16 @@ var bind = function(fn, context) {
   }
 };
 
-
+//ES6 Arrow functions don't have this since the arguments array-like object was a workaround to begin with, which ES6 has solved with a rest parameter:
+const binds = (fn, context, ...args) =>  {
+  const bindArg = args
+  
+  return (...args) => {
+    const callArgs = args
+    const allArgs = bindArg.concat(callArgs);
+    return fn.apply(context, allArgs)
+  }
+};
 /*
  * Function.prototype.bind:
  *
