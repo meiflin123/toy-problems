@@ -51,5 +51,54 @@ let nthFib = N => {
 };
 
 
+// similar to climbStairs case on leetcode.
+let climbStairs = n =>{
+  //bottom up solution. dynmaic programming.
+   if (n <= 1) {
+    return 1
+  } 
+  let a = 1;
+  let b = 1;
+  for (let i = 2 ; i <= n; i++) {
+    let temp = a + b;
+    a = b;
+    b = temp
+  }
+  return b
+};
 
+//let's add one more condition, you may only climb 1, 3, or 5 steps at a time. X = {1, 3, 5}
+// logic: numofways(n) = numofways(n-1) + numofways(n-3) + numofways(n-5)
+//not efficient.
+let X = [1, 3, 5]
+let climbStairs = n => {
+  if (n <= 1) {
+    return 1;
+  }
+  total = 0;
+  for (let j of X) {
+    // only when #steps - option >= 0 makes sense. 
+    if((n - j) >= 0) { total += climbStairs(n - j)}
+  }
+  return total;
+}
 
+//bottomup solution
+let climbStairsBottomUp = n => {
+  if(n <= 1) { return 1;}
+  let nums =[];
+  
+  nums[0] = 1;
+
+  for(let i = 1; i <= n; i++) {
+    //from steps = 2 goes up. each n will have up to 3 options 1, 3, 5 steps.
+    let total = 0;
+    for(let j of X) {
+      if((i - j) >= 0) {
+        total += nums[i - j]
+      }
+    }
+    nums[i] = total;
+  }
+  return nums[n]
+}
