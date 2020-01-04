@@ -62,18 +62,14 @@ let characterFrequency = function(string) {
   let result = Object.keys(hashTable).map(ch => [ch, hashTable[ch]])
                                                 
                                                  
-  result.sort((a, b) => b[1]-a[1])
-        .sort((a, b) => {
-    
-    // if a[0] > b[0], return more than 1 = swap., to make b[0] comes first. 
-    if (a[1] === b[1]) {
-      if (a[0] < b[0]) {
-        return -1;
-      } else if(a[0] > b[0]){
-        return 1;
-      }
-   }
+  result.sort((a, b) => {
+    if(a[1] === b[1]) {
+      return a[0] > b[0]? 1:-1
+    }
+    return b[1]-a[1]
   })
+
+  return result;
 };
 
 
