@@ -23,9 +23,9 @@ const diameterOfBinaryTree = node => {
   const lDiameter = diameterOfBinaryTree(node.left);
   const RDiameter = diameterOfBinaryTree(node.right);
 
-  const passRoot = lHeight + rHeight +1
+  const passRoot = lHeight + rHeight +1  //+1 account for the current node
   const notPassRoot = Math.max(lDiameter, rDiameter);
   
-  return passRoot > notPassRoot? passRoot-1 : notPassRoot;
+  return passRoot > notPassRoot? passRoot-1 : notPassRoot;  //-1 because path length = total nodes -1
 }
 }
