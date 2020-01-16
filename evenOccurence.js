@@ -26,6 +26,9 @@ let evenOccurrence = function(arr) {
       hashTable[num] = 1
     } else {
       hashTable[num] +=1
+  /*     if(hashTable[num] % 2 === 0) {
+        return num;
+      }*/ // wouldn't work. test case would return 6.
     }
   }
   
