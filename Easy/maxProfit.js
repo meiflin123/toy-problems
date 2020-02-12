@@ -24,13 +24,21 @@ Output: 0
 Explanation: In this case, no transaction is done, i.e. max profit = 0.*/
 
 var maxProfit = function(prices) {
-    // buy on i day and sell on i+1 day if i+1 got higher price.
+  if(stockPrices.length <= 1) {
+    throw "error";
+  }
+  
+   // buy on i day and sell on i+1 day if i+1 got higher price.
   
   let profit = 0;
-  for (let i = 0; i < prices.length; i++) {
-    if(prices[i+1] - prices[i] > 0) {
-      profit += prices[i+1] - prices[i]
-    } 
+  let neg = stockPrices[1] - stockPrices[0]
+  for (let i = 0; i < stockPrices.length; i++) {
+    let diff = stockPrices[i+1] - stockPrices[i]
+    if(diff> 0) {
+      profit += diff
+    } else if (profit === 0 && diff > neg){
+      neg = diff;
+    }
   }
-  return profit;
+  return profit !== 0? profit : neg;
 };
