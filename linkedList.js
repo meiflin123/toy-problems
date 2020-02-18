@@ -162,6 +162,23 @@ class LinkedList {
     leader.next = leader.next.next;
     return this.printList();
   }
+   reverse() { 
+
+    if(!this.head.next) {
+      return this;
+    }
+    var current = this.head;
+    var previous = null;
+    var next = null;
+    
+    while(current !== null) {
+      next = current.next;
+      current.next = previous;
+      previous = current;
+      current = next;
+    }
+    return previous
+  }
 }
 
 let myLinkedList = new LinkedList(10);
@@ -172,3 +189,4 @@ myLinkedList.insert(20, 88);
 
 myLinkedList.remove(2)
 myLinkedList.remove(2)
+myLinkedList.reverse()
