@@ -12,12 +12,14 @@ class Stack {
     this.bottom = null;
     this.length = 0;
   }
+  //peek the top
   peek() {
     if(this.top !== null) {
       return this.top.value
     }
     return this.top
   }
+  // push onto the top. 
   push(value){
     var val = new Node(value);
   
@@ -25,26 +27,23 @@ class Stack {
       this.top = val;
       this.bottom = val;
     } else {
-      this.bottom.next = val;
-      this.bottom = val;
+      const current = this.top;
+      val.next = current;
+      this.top = val;
     }
     this.length++
     return this;
   }
-
+  
+  //pop from the top.
   pop(){
-    var current = this.top;
-    this.length--
-    if(current.next === null) {
-      this.top = null;
-      return;
+
+    if(this.length === 1) {
+      this.top = this.bottom;
+    } else {
+      this.top = this.top.next;
     }
-    while(current.next !== null) {
-      if(current.next.next === null){
-        current.next = null;
-        this.bottom = current;
-      };
-    }
+    this.length--;
     return this;
   }
 }
