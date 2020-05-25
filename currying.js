@@ -1,11 +1,11 @@
-function f(num1){
+function f(num1, num2, num3){
     if(!num1) {
       return 0
     }
     let num = num1;
   
-    if(arguments.length >= 2) {
-      return arguments[0] + arguments[1]
+    if(num1 && num2 && num3) {
+      return num1 * num2 * num3;
     }
      
     return (num2) => {
