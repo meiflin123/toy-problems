@@ -28,4 +28,3 @@ const diameterOfBinaryTree = node => {
   
   return passRoot > notPassRoot? passRoot-1 : notPassRoot;  //-1 because path length = total nodes -1
 }
-}
